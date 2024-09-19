@@ -5,11 +5,13 @@ public class Queue {
     private int[] data = new int[10];
 
     public Queue(int capacity) {
-        //data = new int[capacity];
-        data = new int[10];
-        head = 0;
-        tail = 0;
-        size = 0;
+        if (capacity <= 0) {
+            throw new IllegalArgumentException("A capacidade deve ser maior que zero");
+        }
+        this.data = new int[capacity];
+        this.head = 0;
+        this.tail = 0;
+        this.size = 0;
     }
 
     public void enqueue(int value) {
@@ -17,19 +19,19 @@ public class Queue {
             throw new IllegalArgumentException("A Fila está cheia");
         }
         data[tail] = value; //add elemento na posicao do tail
-        tail++;
+        tail = (tail + 1) % data.length;  // Circular
         size++;
 
     }
 
-    public void dequeue(){
+    public int dequeue(){
         if (isEmpty()){
             throw new IllegalArgumentException("A fila esta vazia");
         }
         int removedValue = data[head];
-        data[head] = 0;
-        head++;
+        head = (head + 1) % data.length; // movimenta o head de forma circular
         size--;
+        return removedValue;
     }
 
     private boolean isFull(){
@@ -37,6 +39,21 @@ public class Queue {
     }
     private boolean isEmpty(){
         return size == 0;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        for (int i = 0; i < size; i++) {
+            int index = (head + i) % data.length;
+            sb.append(data[index]);
+            if (i < size - 1) {
+                sb.append(", ");
+            }
+        }
+        sb.append("]");
+        return sb.toString();
     }
 }
 
