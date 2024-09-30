@@ -34,10 +34,10 @@ public class Queue {
         return removedValue;
     }
 
-    private boolean isFull(){
+    boolean isFull(){
         return size == data.length;
     }
-    private boolean isEmpty(){
+    boolean isEmpty(){
         return size == 0;
     }
 
