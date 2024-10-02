@@ -41,20 +41,6 @@ public class Queue {
         return size == 0;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("[");
-        for (int i = 0; i < size; i++) {
-            int index = (head + i) % data.length;
-            sb.append(data[index]);
-            if (i < size - 1) {
-                sb.append(", ");
-            }
-        }
-        sb.append("]");
-        return sb.toString();
-    }
 }
 
 
