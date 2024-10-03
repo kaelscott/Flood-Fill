@@ -2,10 +2,10 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        FluidFill fluidFill = new FluidFill("labirinto.png");
+        FloodFill floodFill = new FloodFill("labirinto.png");
 
-        fluidFill.fill(100, 300, 0xFF1E90FF);
-        fluidFill.saveImage("imageOUT/imagem_modificada.png");
+        floodFill.fill(100, 300, 0xFF1E90FF);
+        floodFill.saveImage("imageOUT/imagem_modificada.png");
 
 
     }

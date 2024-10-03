@@ -3,13 +3,13 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class FluidFill {
+public class FloodFill {
     private BufferedImage image;
     private int largura;
     private int altura;
     private int corOriginal;
 
-    public FluidFill(String imagePath) throws IOException{
+    public FloodFill(String imagePath) throws IOException{
         this.image = ImageIO.read(new File(imagePath));
         this.largura = image.getWidth();
         this.altura = image.getHeight();
@@ -29,32 +29,34 @@ public class FluidFill {
             int atualX = queue.dequeue();
             int atualY = queue.dequeue();
             if (atualX < 0 || atualX >= largura || atualY < 0 || atualY >= altura) {
-                continue; // Pula este pixel se estiver fora dos limites
+                continue;
             }
 
             if (image.getRGB(atualX, atualY) != corOriginal) {
-                continue; // Pula se não for da cor original
+                continue;
             }
 
-            // Pinta o pixel atual
             image.setRGB(atualX, atualY, newColor);
 
-
-
-            // Enfileira os pixels vizinhos
             queue.enqueue(atualX + 1); queue.enqueue(atualY); // Direita
             queue.enqueue(atualX - 1); queue.enqueue(atualY); // Esquerda
             queue.enqueue(atualX); queue.enqueue(atualY + 1); // Abaixo
             queue.enqueue(atualX); queue.enqueue(atualY - 1); // Acima
+
         }
     }
 
     public void saveImage(String outputPath) throws IOException {
-        // Salvar a imagem modificada
         File outputFile = new File(outputPath);
         ImageIO.write(image, "png", outputFile);
     }
 
-
-
+    public void printQueue(Queue queue) {
+        System.out.print("Estado da fila: ");
+        for (int i = 0; i < queue.size; i++) {
+            int index = (queue.head + i) % queue.data.length;
+            System.out.print(queue.data[index] + " ");
+        }
+        System.out.println();
+    }
 }

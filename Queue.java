@@ -1,8 +1,8 @@
 public class Queue {
-    private int head = 0;
+    int head = 0;
     private int tail = 0;
-    private int size = 0;
-    private int[] data = new int[10];
+    int size = 0;
+    int[] data = new int[10];
 
     public Queue(int capacity) {
         if (capacity <= 0) {
@@ -18,8 +18,8 @@ public class Queue {
         if (isFull()) {
             throw new IllegalArgumentException("A Fila está cheia");
         }
-        data[tail] = value; //add elemento na posicao do tail
-        tail = (tail + 1) % data.length;  // Circular
+        data[tail] = value;
+        tail = (tail + 1) % data.length;
         size++;
 
     }
@@ -29,7 +29,7 @@ public class Queue {
             throw new IllegalArgumentException("A fila esta vazia");
         }
         int removedValue = data[head];
-        head = (head + 1) % data.length; // movimenta o head de forma circular
+        head = (head + 1) % data.length;
         size--;
         return removedValue;
     }
@@ -40,6 +40,9 @@ public class Queue {
     boolean isEmpty(){
         return size == 0;
     }
+
+
+
 
 }
 
